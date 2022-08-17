@@ -24,7 +24,7 @@ public class RpcServerHandler extends SimpleChannelInboundHandler<RpcProtocol<Rp
         Object result = invoke(msg.getContent());
         resProtocol.setHeader(header);
         RpcResponse response = new RpcResponse();
-        response.setData(response);
+        response.setData(result);
         response.setMsg("success");
         resProtocol.setContent(response);
 
