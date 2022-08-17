@@ -6,6 +6,7 @@ import com.qqz.core.RpcProtocol;
 import com.qqz.core.RpcRequest;
 import com.qqz.core.RpcResponse;
 import com.qqz.spring.SpringBeansManager;
+import com.qqz.spring.service.Mediator;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -21,10 +22,10 @@ public class RpcServerHandler extends SimpleChannelInboundHandler<RpcProtocol<Rp
         RpcProtocol resProtocol = new RpcProtocol();
         Header header = msg.getHeader();
         header.setReqType(ReqType.RESPONSE.getCode());
-        Object result = invoke(msg.getContent());
+        Object result = Mediator.getInstance().processor(msg.getContent());
         resProtocol.setHeader(header);
         RpcResponse response = new RpcResponse();
-        response.setData(response);
+        response.setData(result);
         response.setMsg("success");
         resProtocol.setContent(response);
 

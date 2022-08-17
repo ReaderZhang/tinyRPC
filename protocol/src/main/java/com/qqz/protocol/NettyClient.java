@@ -7,6 +7,7 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.NioSocketChannel;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -25,7 +26,7 @@ public class NettyClient {
         log.info("begin init NettyClient");
         bootstrap = new Bootstrap();
         bootstrap.group(eventExecutors)
-                .channel(NioServerSocketChannel.class)
+                .channel(NioSocketChannel.class)
                 .handler(new RpcClientInitializer());
         this.serviceAddress = serviceAddress;
         this.servicePort = servicePort;
